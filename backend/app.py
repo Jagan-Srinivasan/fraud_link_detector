@@ -59,6 +59,8 @@ def home():
 def check():
     data = request.get_json()
     url = data.get('url', '')
+    print("VT_API_KEY:", VT_API_KEY)
+    print("Received URL:", url)
 
     # Step 1: Basic check
     basic_result = simple_check(url)
