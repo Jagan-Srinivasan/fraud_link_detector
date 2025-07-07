@@ -7,34 +7,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
-    <span id="themeIcon">🌙</span>
-  </div>
-
-  <h1>🕵️‍♂️ Fraud Shopping Link Detector</h1>
-
-  <div class="input-group">
-    <input type="text" id="urlInput" placeholder="Paste shopping link here" autocomplete="off">
-    <span id="copyIcon" title="Copy URL" onclick="copyURL()">📋</span>
-  </div>
-
-  <button onclick="checkURL()" id="checkBtn">
-    <span id="loader" style="display:none"></span>
-    <span id="btnText">Check Now</span>
-  </button>
-
-  <div id="result"></div>
-
-  <div id="resultBox" style="display:none">
-    <div class="card-inner">
-      <h3>🧾 Result Summary</h3>
-      <div id="urlDisplay"></div>
-      <div id="alertArea"></div>
-      <div id="checksList"></div>
-      <div id="verdictBox"></div>
-    </div>
-  </div>
-
+  <header>
+    <span class="brand"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f575.svg" alt="Detective" class="brand-ico"> Fraud Link Detector</span>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </header>
+  <main>
+    <section class="input-section">
+      <div class="input-group">
+        <input type="text" id="urlInput" placeholder="Paste suspicious link here" autocomplete="off" spellcheck="false">
+        <button class="copy-btn" id="copyIcon" title="Copy URL" onclick="copyURL()">📋</button>
+      </div>
+      <button class="submit-btn" onclick="checkURL()" id="checkBtn">
+        <span id="loader" style="display:none"></span>
+        <span id="btnText">Check URL</span>
+      </button>
+      <div id="result"></div>
+    </section>
+    <section id="resultBox" style="display:none">
+      <div class="card-inner">
+        <div id="urlDisplay"></div>
+        <div id="alertArea"></div>
+        <div id="checksList"></div>
+        <div id="verdictBox"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span class="footer-brand">© 2025 Fraud Link Detector</span>
+  </footer>
   <script src="/static/script.js"></script>
 </body>
 </html>
