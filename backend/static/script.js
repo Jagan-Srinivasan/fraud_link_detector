@@ -41,21 +41,26 @@ function checkURL() {
     updateOrCreateLine("whoisCheck", "📆 Domain Info", data.whois_check);
     updateOrCreateLine("structureCheck", "🧬 URL Structure", data.structure_check);
 
-    // Explanation message logic
-    let explanation = "";
-    if (data.vt_check.includes("Clean") && data.basic_check.includes("❌")) {
-      explanation = "⚠️ VirusTotal shows clean, but pattern analysis marked it suspicious.";
-    } else if (data.vt_check === "🔄 Not available") {
-      explanation = "⚠️ VirusTotal check is not active.";
+    // 🧠 Final Verdict Logic (Moved here)
+    let verdict = "";
+    if (data.basic_check.includes("❌") || data.gsb_check.includes("❌")) {
+      verdict = "🔴 Be Careful! This link looks suspicious despite being clean in scans.";
+    } else if (data.vt_check.includes("malicious") || data.vt_check.includes("suspicious")) {
+      verdict = "🔴 Unsafe! This link is flagged by security scanners.";
+    } else if (
+      data.basic_check.includes("✅") &&
+      data.vt_check.includes("✅") &&
+      data.gsb_check.includes("✅")
+    ) {
+      verdict = "🟢 Safe ✅ This link passed all checks. Still, don't share personal info unless you're sure.";
     } else {
-      explanation = "✔️ Multiple security layers have completed their checks.";
+      verdict = "🟡 Mixed Results – Proceed with caution.";
     }
 
-    document.getElementById("explanation").innerText = explanation;
+    document.getElementById("explanation").innerText = verdict;
     resultBox.style.display = "block";
   })
   .catch(() => {
     resultText.innerText = "⚠️ Error checking the link.";
   });
 }
-
