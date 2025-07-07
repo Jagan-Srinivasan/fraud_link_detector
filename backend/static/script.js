@@ -13,32 +13,38 @@ function checkURL() {
   })
   .then(res => res.json())
   .then(data => {
-    // Show all results
+    // Display results
     document.getElementById("basicCheck").innerText = "🛡️ Basic Check: " + data.basic_check;
     document.getElementById("vtCheck").innerText = "🔍 VirusTotal Check: " + data.vt_check;
-    
-    if (data.gsb_check) {
-      // Add Safe Browsing result only if available
-      let gsbPara = document.getElementById("gsbCheck");
-      if (!gsbPara) {
-        gsbPara = document.createElement("p");
-        gsbPara.id = "gsbCheck";
-        gsbPara.style.margin = "5px 0";
-        document.getElementById("resultBox").insertBefore(gsbPara, document.getElementById("explanation"));
+
+    // Create or update additional result lines
+    const resultBox = document.getElementById("resultBox");
+
+    function updateOrCreateLine(id, label, text) {
+      let el = document.getElementById(id);
+      if (!el) {
+        el = document.createElement("p");
+        el.id = id;
+        el.style.margin = "5px 0";
+        resultBox.insertBefore(el, document.getElementById("explanation"));
       }
-      gsbPara.innerText = "🧠 Google Safe Browsing: " + data.gsb_check;
+      el.innerText = label + ": " + text;
     }
 
-    // Explanation message
+    updateOrCreateLine("gsbCheck", "🧠 Google Safe Browsing", data.gsb_check);
+    updateOrCreateLine("sslCheck", "🔐 HTTPS/SSL", data.ssl_check);
+    updateOrCreateLine("whoisCheck", "📆 Domain Info", data.whois_check);
+    updateOrCreateLine("structureCheck", "🧬 URL Structure", data.structure_check);
+
+    // Explanation logic
     const explanation =
       (data.vt_check.includes("Clean") && data.basic_check.includes("❌"))
         ? "⚠️ VirusTotal shows clean, but basic analysis found it suspicious."
         : (data.vt_check === "🔄 Not available")
           ? "⚠️ VirusTotal check is not active."
-          : "⚠️ VirusTotal check is based on scan data.";
+          : "✔️ Multiple checks completed. Interpret based on combined results.";
 
     document.getElementById("explanation").innerText = explanation;
-
     document.getElementById("resultBox").style.display = "block";
   })
   .catch(() => {
