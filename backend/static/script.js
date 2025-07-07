@@ -3,11 +3,9 @@ function toggleTheme() {
   const body = document.body;
   body.classList.toggle('dark');
   document.getElementById('themeIcon').innerText = body.classList.contains('dark') ? "☀️" : "🌙";
-  // Store theme in localStorage
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 }
 (function() {
-  // On load, set theme from localStorage
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
     document.getElementById('themeIcon').innerText = "☀️";
@@ -25,7 +23,7 @@ function copyURL() {
 }
 
 // --- Shorten long URLs for display ---
-function shortenURL(url, maxLen=60) {
+function shortenURL(url, maxLen=64) {
   if (url.length <= maxLen) return url;
   return url.slice(0, 32) + "..." + url.slice(-20);
 }
@@ -89,7 +87,7 @@ function checkURL() {
   if (analysis.isIP) extraAlerts.push("⚠️ This link uses an IP address instead of a domain (highly suspicious).");
   if (analysis.hasPort) extraAlerts.push(`⚠️ Uses non-standard port: <b>${analysis.port}</b>`);
   if (extraAlerts.length) {
-    alertArea.innerHTML = extraAlerts.map(msg => 
+    alertArea.innerHTML = extraAlerts.map(msg =>
       `<div class="status-line status-red">${msg}</div>`).join("");
     resultBox.style.display = "block";
     hideLoader();
@@ -103,7 +101,6 @@ function checkURL() {
   })
     .then(res => res.json())
     .then(data => {
-      // Build status lines
       function statusClass(val) {
         if (val.includes("❌") || val.includes("malicious") || val.includes("Unsafe") || val.includes("Shortened")) return "status-red";
         if (val.includes("⚠️") || val.includes("Mixed") || val.includes("expiring") || val.includes("suspicious")) return "status-yellow";
@@ -119,7 +116,7 @@ function checkURL() {
         {id: "structure", label: "🧬 Structure", value: data.structure_check}
       ];
 
-      checksList.innerHTML = results.map(r => 
+      checksList.innerHTML = results.map(r =>
         `<div class="status-line ${statusClass(r.value)}"><span>${r.label}</span><span>${r.value}</span></div>`
       ).join("");
 
