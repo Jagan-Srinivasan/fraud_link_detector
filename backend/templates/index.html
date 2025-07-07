@@ -7,36 +7,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>🕵️‍♂️ Fraud Shopping Link Detector</h1>
-
-  <!-- Input field -->
-  <input type="text" id="urlInput" placeholder="Paste shopping link here" autocomplete="off">
-
-  <!-- Submit Button -->
-  <button onclick="checkURL()">Check Now</button>
-
-  <!-- Quick Error Display -->
-  <div id="result"></div>
-
-  <!-- Result Card Box -->
-  <div id="resultBox">
-    <h3>🧾 Result Summary:</h3>
-
-    <!-- Individual Check Sections -->
-    <p id="basicCheck"></p>
-    <p id="vtCheck"></p>
-    <p id="gsbCheck"></p>
-    <p id="sslCheck"></p>
-    <p id="whoisCheck"></p>
-    <p id="structureCheck"></p>
-
-    <!-- Final Explanation -->
-    <p id="explanation"></p>
-    <p id="verdict" style="margin-top: 20px; font-size: 18px; font-weight: bold; color: #d32f2f;"></p>
-
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+    <span id="themeIcon">🌙</span>
   </div>
 
-  <!-- Script -->
+  <h1>🕵️‍♂️ Fraud Shopping Link Detector</h1>
+
+  <div class="input-group">
+    <input type="text" id="urlInput" placeholder="Paste shopping link here" autocomplete="off">
+    <span id="copyIcon" title="Copy URL" onclick="copyURL()">📋</span>
+  </div>
+
+  <button onclick="checkURL()" id="checkBtn">
+    <span id="loader" style="display:none"></span>
+    <span id="btnText">Check Now</span>
+  </button>
+
+  <div id="result"></div>
+
+  <div id="resultBox" style="display:none">
+    <div class="card-inner">
+      <h3>🧾 Result Summary</h3>
+      <div id="urlDisplay"></div>
+      <div id="alertArea"></div>
+      <div id="checksList"></div>
+      <div id="verdictBox"></div>
+    </div>
+  </div>
+
   <script src="/static/script.js"></script>
 </body>
 </html>
