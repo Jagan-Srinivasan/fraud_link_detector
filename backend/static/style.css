@@ -1,109 +1,161 @@
 /* Overall Body Styling */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
-  max-width: 650px;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  max-width: 700px;
   margin: 50px auto;
-  padding: 30px;
+  padding: 38px;
   text-align: center;
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 6px 32px rgba(26, 55, 120, 0.13), 0 1.5px 5px rgba(58, 134, 255, 0.07);
+  border: 1.5px solid #e5e9f7;
 }
 
 /* Title */
 h1 {
   color: #1e3a8a;
-  font-size: 30px;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
+  font-size: 2.3rem;
+  margin-bottom: 28px;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 12px #a9c9ff44;
+  font-weight: 800;
+  background: linear-gradient(90deg, #3a86ff 20%, #1e3a8a 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Input Box */
 input[type="text"] {
   width: 100%;
-  padding: 14px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 16px 18px;
+  border: 2.2px solid #c1d3fe;
+  border-radius: 10px;
+  font-size: 17px;
   outline: none;
+  background: #f5f8ff;
+  margin-bottom: 0px;
   transition: border 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px #e7f0ff7a;
 }
 
 input[type="text"]:focus {
   border-color: #3a86ff;
-  box-shadow: 0 0 5px rgba(58, 134, 255, 0.4);
+  box-shadow: 0 0 8px rgba(58, 134, 255, 0.22);
 }
 
 /* Button Styling */
 button {
-  margin-top: 20px;
-  background-color: #3a86ff;
-  color: white;
-  padding: 12px 28px;
+  margin-top: 22px;
+  background: linear-gradient(90deg,#3a86ff 65%,#1e3a8a 100%);
+  color: #fff;
+  padding: 13px 38px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 10px #bdd7ff5a;
+  transition: background 0.3s, transform 0.18s, box-shadow 0.3s;
+  letter-spacing: 0.5px;
 }
 
 button:hover {
-  background-color: #265df2;
-  transform: scale(1.03);
+  background: linear-gradient(90deg,#265df2 70%,#3a86ff 100%);
+  transform: scale(1.04);
+  box-shadow: 0 4px 18px #a6c7ff5a;
 }
 
 /* Error Message */
 #result {
   margin-top: 25px;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 1.12rem;
+  font-weight: 700;
   color: #d32f2f;
+  letter-spacing: 0.2px;
+  background: #ffeaea;
+  border-left: 5px solid #d32f2f;
+  padding: 11px 15px;
+  border-radius: 7px;
+  display: none;
+  transition: opacity 0.3s;
 }
 
-/* Result Summary Box */
+/* Result Card / Summary Box */
 #resultBox {
-  margin-top: 35px;
-  padding: 25px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  margin-top: 38px;
+  padding: 0;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 8px 36px 2px rgba(58,134,255,0.13), 0 1.5px 5px rgba(58,134,255,0.08);
   display: none;
   text-align: left;
-  transition: all 0.3s;
+  overflow: hidden;
+  animation: fadeInCard 0.65s cubic-bezier(.16,.99,.43,1.01);
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Card Inner */
+#resultBox .card-inner {
+  padding: 30px 28px 22px 28px;
 }
 
 /* Section Title */
 #resultBox h3 {
-  color: #111;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 5px;
+  color: #144fc7;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+  border-bottom: 2.5px solid #e4ebff;
+  padding-bottom: 7px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: linear-gradient(90deg, #3a86ff2e 0%, #cfdef3 100%);
 }
 
 /* Result Lines */
 #resultBox p {
-  background-color: #f1f5ff;
-  border-left: 5px solid #3a86ff;
-  margin: 10px 0;
-  padding: 10px 15px;
-  border-radius: 6px;
-  font-size: 15.5px;
-  line-height: 1.4;
+  background: linear-gradient(90deg, #f1f5ff 65%, #e5eaff 100%);
+  border-left: 6px solid #3a86ff;
+  margin: 13px 0;
+  padding: 13px 18px;
+  border-radius: 7px;
+  font-size: 1.03rem;
+  line-height: 1.5;
   word-wrap: break-word;
+  color: #20294f;
+  box-shadow: 0 1px 6px #e7f0ff2e;
+  transition: background 0.25s;
 }
 
 #resultBox p span {
-  font-weight: 600;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.2px;
 }
 
 /* Explanation Line */
 #explanation {
-  font-size: 14px;
-  color: #666;
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  padding: 10px;
-  border-left: 5px solid #999;
-  border-radius: 6px;
+  font-size: 15px;
+  color: #5970a7;
+  margin-top: 22px;
+  background: #f8faff;
+  padding: 11px;
+  border-left: 6px solid #7aaaff;
+  border-radius: 7px;
+  box-shadow: 0 1.5px 8px #e7f0ff3b;
+  font-style: italic;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+    max-width: 98vw;
+  }
+  #resultBox .card-inner {
+    padding: 19px 7vw 16px 7vw;
+  }
 }
