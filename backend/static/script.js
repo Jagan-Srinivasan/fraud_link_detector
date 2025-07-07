@@ -2,13 +2,16 @@
 function toggleTheme() {
   const body = document.body;
   body.classList.toggle('dark');
-  document.getElementById('themeIcon').innerText = body.classList.contains('dark') ? "☀️" : "🌙";
+  // Sun/Moon icon swap
+  document.getElementById('themeIcon').innerHTML = body.classList.contains('dark')
+    ? '<circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-width="2" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>'
+    : '<circle cx="12" cy="12" r="9" stroke-width="2"/><path id="themePath" stroke-width="2" d="M12 3V5M12 19v2M4.22 4.22l1.42 1.42M17.66 17.66l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M17.66 6.34l1.42-1.42"/>';
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 }
 (function() {
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
-    document.getElementById('themeIcon').innerText = "☀️";
+    document.getElementById('themeIcon').innerHTML = '<circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-width="2" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>';
   }
 })();
 
@@ -18,8 +21,9 @@ function copyURL() {
   input.select();
   input.setSelectionRange(0, 99999);
   document.execCommand("copy");
-  document.getElementById('copyIcon').innerText = "✅";
-  setTimeout(() => (document.getElementById('copyIcon').innerText = "📋"), 900);
+  document.getElementById('copyIcon').innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 9V7a3 3 0 0 1 3-3h5a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3v-2"/><rect x="5" y="11" width="9" height="7" rx="2"/></svg>';
+  setTimeout(() => (document.getElementById('copyIcon').innerHTML =
+    '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="9" height="12" rx="2"/><path d="M9 4V2a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2" /></svg>'), 900);
 }
 
 // --- Shorten long URLs for display ---
