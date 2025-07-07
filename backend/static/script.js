@@ -8,25 +8,17 @@ function checkURL() {
   })
   .then(res => res.json())
   .then(data => {
-    const basicResult = data.result;  // Your backend check
-    const virusTotal = data.virustotal || "unknown";  // Simulated for now
+    const basicResult = data.result || "⚠️ Could not analyze";
+    const virusTotal = data.virustotal || "not_available";
 
-    // Display the result box
     document.getElementById("resultBox").style.display = "block";
-
-    // Update each field
     document.getElementById("basicCheck").innerText = `🛡️ Basic Check: ${basicResult}`;
 
     if (virusTotal === "clean") {
       document.getElementById("vtCheck").innerText = `🔍 VirusTotal Check: ✅ No known reports`;
-
-      if (basicResult.includes("❌")) {
-        document.getElementById("explanation").innerText =
-          "⚠️ This link looks suspicious even though no antivirus flagged it. New scams may not yet be reported.";
-      } else {
-        document.getElementById("explanation").innerText =
-          "✅ This link appears safe in both checks. Still, always be cautious while shopping online.";
-      }
+      document.getElementById("explanation").innerText = basicResult.includes("❌")
+        ? "⚠️ This link looks suspicious even though no antivirus flagged it. Stay alert."
+        : "✅ This link appears safe in both checks.";
     } else {
       document.getElementById("vtCheck").innerText = `🔍 VirusTotal Check: 🔄 Not available`;
       document.getElementById("explanation").innerText =
