@@ -7,35 +7,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <header>
-    <span class="brand"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f575.svg" alt="Detective" class="brand-ico"> Fraud Link Detector</span>
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">
-      <span id="themeIcon">🌙</span>
-    </button>
-  </header>
-  <main>
-    <section class="input-section">
-      <div class="input-group">
-        <input type="text" id="urlInput" placeholder="Paste suspicious link here" autocomplete="off" spellcheck="false">
-        <button class="copy-btn" id="copyIcon" title="Copy URL" onclick="copyURL()">📋</button>
+  <header class="site-header">
+    <div class="container header-flex">
+      <div class="brand">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f575.svg" alt="Detective" class="brand-ico">
+        <span>Bomma Detect</span>
       </div>
-      <button class="submit-btn" onclick="checkURL()" id="checkBtn">
-        <span id="loader" style="display:none"></span>
-        <span id="btnText">Check URL</span>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">
+        <span id="themeIcon">🌙</span>
       </button>
-      <div id="result"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="main-card container">
+      <h1>🕵️‍♂️ Detect Fraudulent  Links</h1>
+      <div class="input-section">
+        <div class="input-group">
+          <input type="text" id="urlInput" placeholder="Paste suspicious link here" autocomplete="off" spellcheck="false">
+          <button class="copy-btn" id="copyIcon" title="Copy URL" onclick="copyURL()">📋</button>
+        </div>
+        <button class="submit-btn" onclick="checkURL()" id="checkBtn">
+          <span id="loader" style="display:none"></span>
+          <span id="btnText">Check URL</span>
+        </button>
+        <div id="result"></div>
+      </div>
+      <section id="resultBox" style="display:none">
+        <div class="card-inner">
+          <div id="urlDisplay"></div>
+          <div id="alertArea"></div>
+          <div id="checksList"></div>
+          <div id="verdictBox"></div>
+        </div>
+      </section>
+      <div class="qr-app-section">
+        <h3>📲 Get the App</h3>
+        <div class="qr-links">
+          <!-- Replace src with your app QR/download links -->
+          <div class="qr-download">
+            <img src="/static/qr_android.png" alt="Android App QR" />
+            <span>Android</span>
+          </div>
+          <div class="qr-download">
+            <img src="/static/qr_ios.png" alt="iOS App QR" />
+            <span>iOS</span>
+          </div>
+        </div>
+        <div class="download-links">
+          <a href="#" class="download-btn">Here</a>
+        </div>
+      </div>
     </section>
-    <section id="resultBox" style="display:none">
-      <div class="card-inner">
-        <div id="urlDisplay"></div>
-        <div id="alertArea"></div>
-        <div id="checksList"></div>
-        <div id="verdictBox"></div>
+
+    <section class="info-section container">
+      <div class="info-flex">
+        <div class="info-card">
+          <h2>About This Project</h2>
+          <p>
+            <b>Fraud Link Detector</b> helps you instantly check any shopping or suspicious link for scams, malware, or phishing threats. Powered by pattern analysis, VirusTotal, Google Safe Browsing, SSL/WHOIS, and more.
+          </p>
+        </div>
+        <div class="info-card">
+          <h2>How It Works</h2>
+          <ol>
+            <li>Paste or scan a link above.</li>
+            <li>Our AI and security APIs check for common fraud patterns, blacklist status, SSL, and domain trust.</li>
+            <li>Get a clear, color-coded verdict and risk suggestions.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section container">
+      <h2>🌟 My Other Products</h2>
+      <div class="products-flex">
+        <a class="product-card" href="https://my-notes-app-dfwz.onrender.com/" target="_blank">
+          <div class="product-title">📝 My Notes App</div>
+          <div class="product-desc">A secure, simple notebook for all your ideas and todos.</div>
+        </a>
+        <a class="product-card" href="https://truthchecker-bd4r.onrender.com/" target="_blank">
+          <div class="product-title">🔎 TruthChecker</div>
+          <div class="product-desc">Instant fact-checking for news, claims, and forwards.</div>
+        </a>
+        <a class="product-card" href="https://bomma-chatbot.onrender.com/" target="_blank">
+          <div class="product-title">🤖 Bomma Chatbot</div>
+          <div class="product-desc">AI-powered Q&A and productivity assistant chatbot.</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="creator-section container">
+      <div class="creator-card">
+        <h2>👨‍💻 Creator Info</h2>
+        <p>
+          Built &amp; maintained by <b>Jagan Srinivasan</b>.<br>
+          <a href="mailto:jaganrmkcet@gmail.com">jaganrmkcet@gmail.com</a><br>
+          <a href="https://github.com/Jagan-Srinivasan" target="_blank">GitHub: @Jagan-Srinivasan</a>
+        </p>
       </div>
     </section>
   </main>
-  <footer>
-    <span class="footer-brand">© 2025 Fraud Link Detector</span>
+
+  <footer class="site-footer">
+    <div class="container">
+      @ 2025 Bomma Detect &middot; Made with ❤️ by Bomma
+    </div>
   </footer>
   <script src="/static/script.js"></script>
 </body>
