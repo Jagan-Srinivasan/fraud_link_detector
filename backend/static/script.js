@@ -56,8 +56,10 @@ function checkURL() {
     } else {
       verdict = "🟡 Mixed Results – Proceed with caution.";
     }
-
+     
     document.getElementById("explanation").innerText = verdict;
+    document.getElementById("verdict").innerText = verdict;
+
     resultBox.style.display = "block";
   })
   .catch(() => {
