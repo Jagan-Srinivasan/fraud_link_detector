@@ -1,5 +1,10 @@
 function checkURL() {
-  const url = document.getElementById("urlInput").value;
+  const url = document.getElementById("urlInput").value.trim(); // ⬅️ Add .trim()
+
+  if (!url) {
+    document.getElementById("result").innerText = "❌ Please enter a valid URL.";
+    return;
+  }
 
   fetch('/check', {
     method: 'POST',
@@ -8,27 +13,14 @@ function checkURL() {
   })
   .then(res => res.json())
   .then(data => {
-    const basicResult = data.result || "⚠️ Could not analyze";
-    const virusTotal = data.virustotal || "not_available";
-
+    document.getElementById("basicCheck").innerText = "🛡️ Basic Check: " + data.basic_check;
+    document.getElementById("vtCheck").innerText = "🔍 VirusTotal Check: " + data.vt_check;
+    document.getElementById("explanation").innerText =
+      "⚠️ VirusTotal check is " + (data.vt_check === "🔄 Not available" ? "not active." : "based on scan data.");
     document.getElementById("resultBox").style.display = "block";
-    document.getElementById("basicCheck").innerText = `🛡️ Basic Check: ${basicResult}`;
-
-    if (virusTotal === "clean") {
-      document.getElementById("vtCheck").innerText = `🔍 VirusTotal Check: ✅ No known reports`;
-      document.getElementById("explanation").innerText = basicResult.includes("❌")
-        ? "⚠️ This link looks suspicious even though no antivirus flagged it. Stay alert."
-        : "✅ This link appears safe in both checks.";
-    } else {
-      document.getElementById("vtCheck").innerText = `🔍 VirusTotal Check: 🔄 Not available`;
-      document.getElementById("explanation").innerText =
-        "⚠️ VirusTotal check is not active. Result shown is based only on pattern detection.";
-    }
   })
   .catch(() => {
-    document.getElementById("resultBox").style.display = "block";
-    document.getElementById("basicCheck").innerText = "❌ Error checking link";
-    document.getElementById("vtCheck").innerText = "";
-    document.getElementById("explanation").innerText = "⚠️ Something went wrong. Please try again.";
+    document.getElementById("result").innerText = "⚠️ Error checking the link.";
   });
 }
+
