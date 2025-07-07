@@ -1,7 +1,8 @@
+import os
 from flask import Flask, request, jsonify, render_template
-import re
 
-app = Flask(__name__, template_folder="../templates", static_folder="../static")
+app = Flask(__name__, template_folder="templates", static_folder="static")
+
 
 # Basic fraud check function
 def simple_check(url):
