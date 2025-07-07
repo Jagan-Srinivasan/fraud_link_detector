@@ -70,7 +70,6 @@ def check():
     vt_status = "🔄 Not available"
 
     if vt_api_key:
-        import requests
         headers = {"x-apikey": vt_api_key}
         scan_url = "https://www.virustotal.com/api/v3/urls"
         try:
@@ -84,12 +83,16 @@ def check():
                 report_url = f"https://www.virustotal.com/api/v3/analyses/{url_id}"
                 report = requests.get(report_url, headers=headers).json()
                 stats = report["data"]["attributes"].get("stats", {})
+
                 if stats.get("malicious", 0) > 0:
                     vt_status = "❌ VirusTotal: Malicious"
                 elif stats.get("suspicious", 0) > 0:
                     vt_status = "⚠️ VirusTotal: Suspicious"
                 else:
-                    vt_status = "✅ VirusTotal: Clean"
+                    if basic_result.startswith("❌"):
+                        vt_status = "⚠️ VirusTotal: No known issues reported"
+                    else:
+                        vt_status = "✅ VirusTotal: Clean"
             else:
                 vt_status = "⚠️ VT API Error"
         except Exception as e:
@@ -101,6 +104,7 @@ def check():
         "basic_check": basic_result,
         "vt_check": vt_status
     })
+
 
 
 # Run server
