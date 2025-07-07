@@ -3,8 +3,7 @@ services:
     name: fraud-link-detector
     env: python
     buildCommand: ""
-    startCommand: "python backend/app.py"
+    startCommand: "python app.py"
     envVars:
       - key: PORT
         value: 10000
-
