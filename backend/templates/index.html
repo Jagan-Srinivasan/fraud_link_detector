@@ -8,18 +8,20 @@
 </head>
 <body>
   <h1>🕵️‍♂️ Fraud Shopping Link Detector</h1>
-  
+
   <input type="text" id="urlInput" placeholder="Paste shopping link here" autocomplete="off">
   <br><br>
   <button onclick="checkURL()">Check Now</button>
-  
+
   <div id="result" style="margin-top: 20px; font-weight: bold;"></div>
-<div id="resultBox" style="margin-top: 20px; padding: 15px; border-radius: 8px; font-size: 18px; display: none;">
-  <h3>🧾 Result Summary:</h3>
-  <p id="basicCheck" style="margin: 5px 0;"></p>
-  <p id="vtCheck" style="margin: 5px 0;"></p>
-  <p id="explanation" style="margin-top: 10px; font-size: 14px; color: #666;"></p>
-</div>
+
+  <div id="resultBox" style="margin-top: 20px; padding: 15px; border-radius: 8px; font-size: 18px; display: none;">
+    <h3>🧾 Result Summary:</h3>
+    <p id="basicCheck" style="margin: 5px 0;"></p>
+    <p id="vtCheck" style="margin: 5px 0;"></p>
+    <p id="gsbCheck" style="margin: 5px 0;"></p> <!-- Google Safe Browsing -->
+    <p id="explanation" style="margin-top: 10px; font-size: 14px; color: #666;"></p>
+  </div>
 
   <script src="/static/script.js"></script>
 </body>
