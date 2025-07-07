@@ -1,8 +1,14 @@
 function checkURL() {
   const url = document.getElementById("urlInput").value.trim();
+  const resultBox = document.getElementById("resultBox");
+  const resultText = document.getElementById("result");
+
+  // Clear previous result box contents
+  resultText.innerText = "";
+  resultBox.style.display = "none";
 
   if (!url) {
-    document.getElementById("result").innerText = "❌ Please enter a valid URL.";
+    resultText.innerText = "❌ Please enter a valid URL.";
     return;
   }
 
@@ -13,14 +19,12 @@ function checkURL() {
   })
   .then(res => res.json())
   .then(data => {
-    // Display results
+    // Basic and VirusTotal check results
     document.getElementById("basicCheck").innerText = "🛡️ Basic Check: " + data.basic_check;
     document.getElementById("vtCheck").innerText = "🔍 VirusTotal Check: " + data.vt_check;
 
-    // Create or update additional result lines
-    const resultBox = document.getElementById("resultBox");
-
-    function updateOrCreateLine(id, label, text) {
+    // Function to add/update result lines
+    const updateOrCreateLine = (id, label, value) => {
       let el = document.getElementById(id);
       if (!el) {
         el = document.createElement("p");
@@ -28,26 +32,30 @@ function checkURL() {
         el.style.margin = "5px 0";
         resultBox.insertBefore(el, document.getElementById("explanation"));
       }
-      el.innerText = label + ": " + text;
-    }
+      el.innerText = `${label}: ${value}`;
+    };
 
+    // Update dynamic check lines
     updateOrCreateLine("gsbCheck", "🧠 Google Safe Browsing", data.gsb_check);
     updateOrCreateLine("sslCheck", "🔐 HTTPS/SSL", data.ssl_check);
     updateOrCreateLine("whoisCheck", "📆 Domain Info", data.whois_check);
     updateOrCreateLine("structureCheck", "🧬 URL Structure", data.structure_check);
 
-    // Explanation logic
-    const explanation =
-      (data.vt_check.includes("Clean") && data.basic_check.includes("❌"))
-        ? "⚠️ VirusTotal shows clean, but basic analysis found it suspicious."
-        : (data.vt_check === "🔄 Not available")
-          ? "⚠️ VirusTotal check is not active."
-          : "✔️ Multiple checks completed. Interpret based on combined results.";
+    // Explanation message logic
+    let explanation = "";
+    if (data.vt_check.includes("Clean") && data.basic_check.includes("❌")) {
+      explanation = "⚠️ VirusTotal shows clean, but pattern analysis marked it suspicious.";
+    } else if (data.vt_check === "🔄 Not available") {
+      explanation = "⚠️ VirusTotal check is not active.";
+    } else {
+      explanation = "✔️ Multiple security layers have completed their checks.";
+    }
 
     document.getElementById("explanation").innerText = explanation;
-    document.getElementById("resultBox").style.display = "block";
+    resultBox.style.display = "block";
   })
   .catch(() => {
-    document.getElementById("result").innerText = "⚠️ Error checking the link.";
+    resultText.innerText = "⚠️ Error checking the link.";
   });
 }
+
